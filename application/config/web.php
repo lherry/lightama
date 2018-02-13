@@ -2,10 +2,12 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$i18n = require __DIR__ . '/i18n.php';
 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    'language' => 'fr-FR',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -43,6 +45,8 @@ $config = [
             ],
         ],
         'db' => $db,
+        // Translations routing...
+        'i18n' => $i18n,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

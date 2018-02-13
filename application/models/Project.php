@@ -83,4 +83,13 @@ class Project extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProjectMember::className(), ['project_Id' => 'id']);
     }
+
+    /**
+     * @inheritdoc
+     * @return ProjectQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ProjectQuery(get_called_class());
+    }
 }
