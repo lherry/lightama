@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=otasks',
-    'username' => 'otasks',
-    'password' => 'otasks',
+    'dsn' => 'mysql:host=localhost;port=3308;dbname=lightama',
+    'username' => 'lightama',
+    'password' => 'lightama',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
