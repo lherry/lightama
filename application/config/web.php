@@ -5,7 +5,9 @@ $db = require __DIR__ . '/db.php';
 $i18n = require __DIR__ . '/i18n.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'lightama',
+    'name' => 'LighTaMa',
+    'version' => '0.1',
     'basePath' => dirname(__DIR__),
     'language' => 'fr-FR',
     'bootstrap' => ['log'],
