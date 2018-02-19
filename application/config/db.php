@@ -3,8 +3,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;port=3308;dbname=lightama',
-    'username' => 'lightama',
-    'password' => 'lightama',
+    'username' => 'yatama',
+    'password' => 'yatama',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
