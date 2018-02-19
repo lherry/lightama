@@ -1,1 +1,1 @@
-# lightama
+# YaTaMa - Yet Another Task Manager
