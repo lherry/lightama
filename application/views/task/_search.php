@@ -22,9 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'priority_id') ?>
 
-    <?= $form->field($model, 'creation_date') ?>
+    <?= $form->field($model, 'created_at') ?>
 
-    <?= $form->field($model, 'modification_date') ?>
+    <?= $form->field($model, 'updated_at') ?>
 
     <?= $form->field($model, 'label') ?>
 

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ProjectSearch */
+/* @var $model app\models\UserSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="project-search">
+<div class="user-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -24,11 +24,19 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'updated_at') ?>
 
-    <?= $form->field($model, 'label') ?>
+    <?= $form->field($model, 'username') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?= $form->field($model, 'password') ?>
 
-    <?php // echo $form->field($model, 'parent_project_id') ?>
+    <?php // echo $form->field($model, 'firstname') ?>
+
+    <?php // echo $form->field($model, 'lastname') ?>
+
+    <?php // echo $form->field($model, 'email') ?>
+
+    <?php // echo $form->field($model, 'enabled') ?>
+
+    <?php // echo $form->field($model, 'last_connected_at') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

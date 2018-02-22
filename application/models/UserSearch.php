@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Task;
+use app\models\User;
 
 /**
- * TaskSearch represents the model behind the search form of `app\models\Task`.
+ * UserSearch represents the model behind the search form of `app\models\User`.
  */
-class TaskSearch extends Task
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['id', 'priority_id'], 'integer'],
-            [['created_at', 'updated_at', 'label', 'description', 'start_date', 'deadline_date', 'cancelled'], 'safe'],
-            [['duration'], 'number'],
+            [['id'], 'integer'],
+            [['created_at', 'updated_at', 'username', 'password', 'firstname', 'lastname', 'email', 'enabled', 'last_connected_at'], 'safe'],
         ];
     }
 
@@ -42,7 +41,7 @@ class TaskSearch extends Task
      */
     public function search($params)
     {
-        $query = Task::find();
+        $query = User::find();
 
         // add conditions that should always apply here
 
@@ -61,17 +60,17 @@ class TaskSearch extends Task
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'priority_id' => $this->priority_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'duration' => $this->duration,
-            'start_date' => $this->start_date,
-            'deadline_date' => $this->deadline_date,
+            'last_connected_at' => $this->last_connected_at,
         ]);
 
-        $query->andFilterWhere(['like', 'label', $this->label])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'cancelled', $this->cancelled]);
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'firstname', $this->firstname])
+            ->andFilterWhere(['like', 'lastname', $this->lastname])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'enabled', $this->enabled]);
 
         return $dataProvider;
     }

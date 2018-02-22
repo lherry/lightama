@@ -19,7 +19,7 @@ class ProjectSearch extends Project
     {
         return [
             [['id', 'parent_project_id'], 'integer'],
-            [['creation_date', 'modification_date', 'label', 'name', 'description'], 'safe'],
+            [['created_at', 'updated_at', 'label', 'description'], 'safe'],
         ];
     }
 
@@ -60,13 +60,12 @@ class ProjectSearch extends Project
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'creation_date' => $this->creation_date,
-            'modification_date' => $this->modification_date,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'parent_project_id' => $this->parent_project_id,
         ]);
 
         $query->andFilterWhere(['like', 'label', $this->label])
-            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

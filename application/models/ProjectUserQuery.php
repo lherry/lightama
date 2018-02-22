@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[Member]].
+ * This is the ActiveQuery class for [[ProjectUser]].
  *
- * @see Member
+ * @see ProjectUser
  */
-class MemberQuery extends \yii\db\ActiveQuery
+class ProjectUserQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class MemberQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Member[]|array
+     * @return ProjectUser[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class MemberQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Member|array|null
+     * @return ProjectUser|array|null
      */
     public function one($db = null)
     {

@@ -18,8 +18,8 @@ class PrioritySearch extends Priority
     public function rules()
     {
         return [
-            [['id', 'level', 'enabled'], 'integer'],
-            [['label'], 'safe'],
+            [['id'], 'integer'],
+            [['level', 'label', 'enabled'], 'safe'],
         ];
     }
 
@@ -60,11 +60,11 @@ class PrioritySearch extends Priority
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'level' => $this->level,
-            'enabled' => $this->enabled,
         ]);
 
-        $query->andFilterWhere(['like', 'label', $this->label]);
+        $query->andFilterWhere(['like', 'level', $this->level])
+            ->andFilterWhere(['like', 'label', $this->label])
+            ->andFilterWhere(['like', 'enabled', $this->enabled]);
 
         return $dataProvider;
     }

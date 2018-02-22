@@ -5,23 +5,23 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "task_member".
+ * This is the model class for table "project_user_task".
  *
  * @property string $id
+ * @property string $project_user_id
  * @property string $task_id
- * @property string $project_has_member_id
  *
- * @property ProjectMember $projectHasMember
+ * @property ProjectUser $projectUser
  * @property Task $task
  */
-class TaskMember extends \yii\db\ActiveRecord
+class ProjectUserTask extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'task_member';
+        return 'project_user_task';
     }
 
     /**
@@ -30,10 +30,9 @@ class TaskMember extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'task_id', 'project_has_member_id'], 'required'],
-            [['id', 'task_id', 'project_has_member_id'], 'integer'],
-            [['id'], 'unique'],
-            [['project_has_member_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProjectMember::className(), 'targetAttribute' => ['project_has_member_id' => 'id']],
+            [['project_user_id', 'task_id'], 'required'],
+            [['project_user_id', 'task_id'], 'integer'],
+            [['project_user_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProjectUser::className(), 'targetAttribute' => ['project_user_id' => 'id']],
             [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Task::className(), 'targetAttribute' => ['task_id' => 'id']],
         ];
     }
@@ -45,17 +44,17 @@ class TaskMember extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'project_user_id' => Yii::t('app', 'Project User ID'),
             'task_id' => Yii::t('app', 'Task ID'),
-            'project_has_member_id' => Yii::t('app', 'Project Has Member ID'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProjectHasMember()
+    public function getProjectUser()
     {
-        return $this->hasOne(ProjectMember::className(), ['id' => 'project_has_member_id']);
+        return $this->hasOne(ProjectUser::className(), ['id' => 'project_user_id']);
     }
 
     /**
@@ -68,10 +67,10 @@ class TaskMember extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return TaskMemberQuery the active query used by this AR class.
+     * @return ProjectUserTaskQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new TaskMemberQuery(get_called_class());
+        return new ProjectUserTaskQuery(get_called_class());
     }
 }

@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[TaskMember]].
+ * This is the ActiveQuery class for [[ProjectUserTask]].
  *
- * @see TaskMember
+ * @see ProjectUserTask
  */
-class TaskMemberQuery extends \yii\db\ActiveQuery
+class ProjectUserTaskQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class TaskMemberQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return TaskMember[]|array
+     * @return ProjectUserTask[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class TaskMemberQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return TaskMember|array|null
+     * @return ProjectUserTask|array|null
      */
     public function one($db = null)
     {

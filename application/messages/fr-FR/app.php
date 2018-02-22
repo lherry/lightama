@@ -27,7 +27,20 @@ return [
     
     // == DATABASE ==
 
-    // Project
+    // Common
+    'Created At' => 'Créé le',
+    'Updated At' => 'Mis à jour le',
+
+    // Table : user
+    'Username' => 'Utilisateur',
+    'Password' => 'Mot de passe',
+    'Firstname' => 'Prénom',
+    'Lastname' => 'Nom',
+    'Email' => 'e-mail',
+    'Enabled' => 'Actif',
+    'Last Connected At' => 'Dernière connexion le',
+    
+    // Table : project
     'Projects' => 'Projets',
     'Creation Date' => 'Date création',
     'Modification Date' => 'Date Modification',

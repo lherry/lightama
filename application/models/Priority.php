@@ -30,10 +30,9 @@ class Priority extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'level', 'label', 'enabled'], 'required'],
-            [['id', 'level', 'enabled'], 'integer'],
-            [['label'], 'string', 'max' => 10],
-            [['id'], 'unique'],
+            [['level', 'label', 'enabled'], 'required'],
+            [['level', 'enabled'], 'string', 'max' => 4],
+            [['label'], 'string', 'max' => 20],
         ];
     }
 

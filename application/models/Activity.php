@@ -9,17 +9,17 @@ use Yii;
  *
  * @property string $id
  * @property string $task_id
- * @property string $member_id
- * @property string $creation_date
- * @property string $modification_date
+ * @property string $user_id
+ * @property string $created_at
+ * @property string $updated_at
  * @property string $start_date
  * @property string $end_date
  * @property string $description
  * @property double $duration
  * @property int $finished
  *
- * @property Member $member
  * @property Task $task
+ * @property User $user
  */
 class Activity extends \yii\db\ActiveRecord
 {
@@ -37,14 +37,14 @@ class Activity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'task_id', 'member_id', 'creation_date', 'modification_date', 'start_date', 'end_date', 'duration', 'finished'], 'required'],
-            [['id', 'task_id', 'member_id', 'finished'], 'integer'],
-            [['creation_date', 'modification_date', 'start_date', 'end_date'], 'safe'],
+            [['task_id', 'user_id', 'created_at', 'updated_at', 'start_date', 'end_date', 'duration', 'finished'], 'required'],
+            [['task_id', 'user_id'], 'integer'],
+            [['created_at', 'updated_at', 'start_date', 'end_date'], 'safe'],
             [['description'], 'string'],
             [['duration'], 'number'],
-            [['id'], 'unique'],
-            [['member_id'], 'exist', 'skipOnError' => true, 'targetClass' => Member::className(), 'targetAttribute' => ['member_id' => 'id']],
+            [['finished'], 'string', 'max' => 4],
             [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Task::className(), 'targetAttribute' => ['task_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -56,9 +56,9 @@ class Activity extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'task_id' => Yii::t('app', 'Task ID'),
-            'member_id' => Yii::t('app', 'Member ID'),
-            'creation_date' => Yii::t('app', 'Creation Date'),
-            'modification_date' => Yii::t('app', 'Modification Date'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
             'start_date' => Yii::t('app', 'Start Date'),
             'end_date' => Yii::t('app', 'End Date'),
             'description' => Yii::t('app', 'Description'),
@@ -70,17 +70,17 @@ class Activity extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMember()
+    public function getTask()
     {
-        return $this->hasOne(Member::className(), ['id' => 'member_id']);
+        return $this->hasOne(Task::className(), ['id' => 'task_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTask()
+    public function getUser()
     {
-        return $this->hasOne(Task::className(), ['id' => 'task_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**

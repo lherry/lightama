@@ -9,8 +9,8 @@ use Yii;
  *
  * @property string $id ID
  * @property string $priority_id
- * @property string $creation_date Creation date
- * @property string $modification_date Modification date
+ * @property string $created_at Creation date
+ * @property string $updated_at Modification date
  * @property string $label Label
  * @property string $description Description
  * @property double $duration Duration
@@ -19,8 +19,8 @@ use Yii;
  * @property int $cancelled Cancelled
  *
  * @property Activity[] $activities
+ * @property ProjectUserTask[] $projectUserTasks
  * @property Priority $priority
- * @property TaskMember[] $taskMembers
  */
 class Task extends \yii\db\ActiveRecord
 {
@@ -38,12 +38,13 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['priority_id', 'creation_date', 'modification_date', 'label'], 'required'],
-            [['priority_id', 'cancelled'], 'integer'],
-            [['creation_date', 'modification_date', 'start_date', 'deadline_date'], 'safe'],
+            [['priority_id', 'created_at', 'updated_at', 'label', 'cancelled'], 'required'],
+            [['priority_id'], 'integer'],
+            [['created_at', 'updated_at', 'start_date', 'deadline_date'], 'safe'],
             [['description'], 'string'],
             [['duration'], 'number'],
             [['label'], 'string', 'max' => 80],
+            [['cancelled'], 'string', 'max' => 4],
             [['priority_id'], 'exist', 'skipOnError' => true, 'targetClass' => Priority::className(), 'targetAttribute' => ['priority_id' => 'id']],
         ];
     }
@@ -56,8 +57,8 @@ class Task extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'priority_id' => Yii::t('app', 'Priority ID'),
-            'creation_date' => Yii::t('app', 'Creation Date'),
-            'modification_date' => Yii::t('app', 'Modification Date'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
             'label' => Yii::t('app', 'Label'),
             'description' => Yii::t('app', 'Description'),
             'duration' => Yii::t('app', 'Duration'),
@@ -78,17 +79,17 @@ class Task extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPriority()
+    public function getProjectUserTasks()
     {
-        return $this->hasOne(Priority::className(), ['id' => 'priority_id']);
+        return $this->hasMany(ProjectUserTask::className(), ['task_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTaskMembers()
+    public function getPriority()
     {
-        return $this->hasMany(TaskMember::className(), ['task_id' => 'id']);
+        return $this->hasOne(Priority::className(), ['id' => 'priority_id']);
     }
 
     /**

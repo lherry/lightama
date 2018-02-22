@@ -8,16 +8,15 @@ use Yii;
  * This is the model class for table "project".
  *
  * @property string $id
- * @property string $creation_date
- * @property string $modification_date
+ * @property string $created_at
+ * @property string $updated_at
  * @property string $label
- * @property string $name
  * @property string $description
  * @property string $parent_project_id
  *
  * @property Project $parentProject
  * @property Project[] $projects
- * @property ProjectMember[] $projectMembers
+ * @property ProjectUser[] $projectUsers
  */
 class Project extends \yii\db\ActiveRecord
 {
@@ -35,11 +34,11 @@ class Project extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['creation_date', 'modification_date', 'label', 'name'], 'required'],
-            [['creation_date', 'modification_date'], 'safe'],
+            [['created_at', 'updated_at', 'label'], 'required'],
+            [['created_at', 'updated_at'], 'safe'],
             [['description'], 'string'],
             [['parent_project_id'], 'integer'],
-            [['label', 'name'], 'string', 'max' => 80],
+            [['label'], 'string', 'max' => 80],
             [['parent_project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['parent_project_id' => 'id']],
         ];
     }
@@ -51,10 +50,9 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'creation_date' => Yii::t('app', 'Creation Date'),
-            'modification_date' => Yii::t('app', 'Modification Date'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
             'label' => Yii::t('app', 'Label'),
-            'name' => Yii::t('app', 'Name'),
             'description' => Yii::t('app', 'Description'),
             'parent_project_id' => Yii::t('app', 'Parent Project ID'),
         ];
@@ -79,9 +77,9 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProjectMembers()
+    public function getProjectUsers()
     {
-        return $this->hasMany(ProjectMember::className(), ['project_Id' => 'id']);
+        return $this->hasMany(ProjectUser::className(), ['project_id' => 'id']);
     }
 
     /**
